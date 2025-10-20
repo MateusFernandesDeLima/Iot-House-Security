@@ -22,7 +22,7 @@ header {
 
 #tituloHeader{
   font-family: "Bebas Neue", sans-serif;
-  font-size: 45px;
+  font-size: 30px;
   font-weight: 1000;
   font-style: normal;
   letter-spacing: 1.5px;
@@ -30,9 +30,10 @@ header {
 
 /* Logo */
 .logo {
-  width: 70px;
-  height: 70px;
+  width: 80px;
+  height: 80px;
   margin-right: 15px;
+  margin-bottom: -5px;
   border-radius: 75%;
 }
 .logo-container {
@@ -40,26 +41,47 @@ header {
   align-items: center;
 }
 
-/* Navegação */
-.nav-links {
-  display: flex;
-  gap: 22px;
+.icons{
+  width: 27px;
+  height: 27px;
+  margin-right: 15px;
+  margin-bottom: -6px;
 }
-.nav-links a {
+
+/* Navegação */
+nav {
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  top: 100;
+  left: 0;
+  background-color: lightgray;
+
+  z-index: 1;
+}
+
+nav a {
   text-decoration: none;
+  display: block;
   color: white;
   transition: 0.3s;
   font-family: "roboto slab", sans-serif;
-  font-size: 25px;
+  font-size: 20px;
   font-weight: 900;
   font-style: normal;
   letter-spacing: 1.5px;
+  line-height: 90px;
+  padding: 12px 15px 12px 32px;
 }
-.nav-links a:hover {
-  color: #4a6cf7;
+
+nav a:hover {
   font-family: "roboto slab", sans-serif;
-  font-size: 25px;
+  font-size: 22px;
   font-weight: 900;
   font-style: normal;
   letter-spacing: 1.5px;
+  background-color: #1a2538;
 }
+
+
+
