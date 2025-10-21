@@ -83,4 +83,12 @@ nav a:hover {
   background-color: gray;
 }
 
+/* Textos */
+.tituloCorpo{
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  font-style: normal;
+  text-align: center;
+}
 
