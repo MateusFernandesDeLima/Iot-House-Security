@@ -1,0 +1,47 @@
+[
+    {
+        "id": 1765301611342,
+        "name": "Câmera da Sala",
+        "type": "camera",
+        "location": "Sala",
+        "status": "online",
+        "batteryLevel": 100,
+        "lastUpdate": "2025-12-09T18:33:31+01:00"
+    },
+    {
+        "id": 1765301623755,
+        "name": "Sensor Jardim",
+        "type": "sensor",
+        "location": "Jardim",
+        "status": "online",
+        "batteryLevel": 100,
+        "lastUpdate": "2025-12-09T18:33:43+01:00"
+    },
+    {
+        "id": 1765301638768,
+        "name": "Câmera Frente",
+        "type": "camera",
+        "location": "Porta da Frente",
+        "status": "online",
+        "batteryLevel": 100,
+        "lastUpdate": "2025-12-09T18:33:58+01:00"
+    },
+    {
+        "id": 1765301655219,
+        "name": "Fechadura Principal",
+        "type": "lock",
+        "location": "Porta da Frente",
+        "status": "online",
+        "batteryLevel": 100,
+        "lastUpdate": "2025-12-09T18:34:16+01:00"
+    },
+    {
+        "id": 1765301700211,
+        "name": "Alarme Porta",
+        "type": "alarm",
+        "location": "Porta da Frente",
+        "status": "online",
+        "batteryLevel": 100,
+        "lastUpdate": "2025-12-09T18:35:00+01:00"
+    }
+]
