@@ -1,27 +1,319 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-  <meta charset='utf-8'>
-  <title>Alertas</title>
-  <link rel='stylesheet' type='text/css' media='screen' href='estilos/main.css'>
-  <link rel='stylesheet' type='text/css' media='screen' href='estilos/alertas.css'>
-  <script src='main.js'></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap=Bebas+Neue&display=swap" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Central de alertas e notificações do sistema SecuHouse">
+    <meta name="theme-color" content="#1a2538">
+    <title>Central de Alertas - SecuHouse</title>
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="imagens/icon-192x192.png">
+    
+    <!-- Fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="estilos/main.css">
+    <link rel="stylesheet" type="text/css" href="estilos/components.css">
+    <link rel="stylesheet" type="text/css" href="estilos/alertas.css">
 </head>
 <body>
-  <header>
-  <div class="logo-container">
-    <img src="imagens/logo.png" alt="Logo do site" class="logo">
-    <h1 id="tituloHeader">SecuHouse</h1>
-  </div>
-</header>
-<nav>
-    <a href="index.html" id = "homeLink"><img src="imagens/home.png"class="icons">Início</a>
-    <a href="dispositivos.html" id = "deviceLink"><img src="imagens/webcam.png" class="icons">Dispositivos</a>
-    <a href="alertas.html" id = "alertLink"><img src="imagens/bell.png" class="icons">Alertas</a>
-    <a href="contato.html" id = "contactLink"><img src="imagens/contact.png" class="icons">Contato</a>
-</nav>
+    <!-- Skip link para acessibilidade -->
+    <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
+    
+    <!-- Cabeçalho -->
+    <header>
+        <div class="logo-container">
+            <img src="imagens/logo.png" alt="Logo SecuHouse" class="logo" width="40" height="40">
+            <h1 id="tituloHeader">SecuHouse</h1>
+        </div>
+        
+        <!-- Controles do cabeçalho -->
+        <div class="d-flex align-items-center gap-3">
+            <!-- Alternador de tema -->
+            <button class="theme-toggle" aria-label="Alternar tema claro/escuro">
+                <i class="fas fa-sun"></i>
+                <i class="fas fa-moon"></i>
+            </button>
+            
+            <!-- Menu mobile -->
+            <button class="menu-toggle d-none d-md-block" aria-label="Menu" aria-expanded="false">
+                <span class="hamburger"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Navegação principal -->
+    <nav aria-label="Menu principal">
+        <div class="nav-group">
+            <a href="index.html">
+                <i class="fas fa-home"></i>
+                <span>Início</span>
+            </a>
+            <a href="dispositivos.html">
+                <i class="fas fa-video"></i>
+                <span>Dispositivos</span>
+            </a>
+            <a href="alertas.html" aria-current="page">
+                <i class="fas fa-bell"></i>
+                <span>Alertas</span>
+            </a>
+            <a href="contato.html">
+                <i class="fas fa-envelope"></i>
+                <span>Contato</span>
+            </a>
+        </div>
+
+        <!-- Ações rápidas -->
+        <div class="d-flex flex-column gap-2 p-3">
+            <button class="btn btn-primary" id="clearAlerts">
+                <i class="fas fa-check-double"></i>
+                <span>Limpar Todos</span>
+            </button>
+            <button class="btn btn-outline" id="notificationSettings">
+                <i class="fas fa-bell"></i>
+                <span>Notificações</span>
+            </button>
+        </div>
+
+        <!-- Ações rápidas do sistema -->
+        <div class="quick-actions">
+            <button class="action-btn" id="armSystem">
+                <i class="fas fa-shield-alt"></i>
+                <span>Ativar Sistema</span>
+            </button>
+            <button class="action-btn emergency" id="emergency">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span>Emergência</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Conteúdo principal -->
+    <main id="main-content" tabindex="-1">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h1 class="mb-2">Central de Alertas</h1>
+                <div class="d-flex align-items-center gap-3 text-muted">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="fas fa-bell"></i>
+                        <span><span id="activeAlerts" class="fw-semibold">0</span> alertas ativos</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="fas fa-clock"></i>
+                        <span>Última atualização: <time id="lastUpdate" class="fw-semibold">agora</time></span>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex gap-2">
+                <button class="btn btn-outline" id="exportAlerts">
+                    <i class="fas fa-file-export"></i>
+                    <span>Exportar</span>
+                </button>
+                <button class="btn btn-primary" id="newAlert">
+                    <i class="fas fa-plus"></i>
+                    <span>Novo Alerta</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Controles de alerta -->
+        <section class="card mb-4" aria-label="Controles de alerta">
+            <div class="card-body p-4">
+                <div class="d-flex gap-4 flex-wrap">
+                    <div class="flex-grow-1">
+                        <div class="form-group mb-0 position-relative">
+                            <i class="fas fa-search position-absolute" style="left: 12px; top: 50%; transform: translateY(-50%);"></i>
+                            <input type="search" 
+                                   class="form-control" 
+                                   id="alert-search" 
+                                   placeholder="Buscar alertas..." 
+                                   aria-label="Buscar alertas"
+                                   style="padding-left: 36px;">
+                        </div>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-primary active" data-filter="all">
+                            Todos
+                            <span class="badge badge-primary">0</span>
+                        </button>
+                        <button class="btn btn-outline" data-filter="critical">
+                            Críticos
+                            <span class="badge badge-danger">0</span>
+                        </button>
+                        <button class="btn btn-outline" data-filter="warning">
+                            Avisos
+                            <span class="badge badge-warning">0</span>
+                        </button>
+                        <button class="btn btn-outline" data-filter="info">
+                            Info
+                            <span class="badge badge-info">0</span>
+                        </button>
+                    </div>
+
+                    <div class="d-flex gap-2 ms-auto">
+                        <button class="btn btn-outline active" data-view="list" aria-label="Visualização em lista">
+                            <i class="fas fa-list"></i>
+                        </button>
+                        <button class="btn btn-outline" data-view="grid" aria-label="Visualização em grade">
+                            <i class="fas fa-th"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lista de alertas -->
+        <section id="alerts-region" 
+                 class="card" 
+                 aria-live="polite" 
+                 aria-atomic="true">
+            <div class="p-0">
+                <ul class="list-unstyled mb-0" id="alertsList">
+                    <!-- Alertas serão inseridos aqui via JavaScript -->
+                </ul>
+            </div>
+        </section>
+
+        <!-- Estado vazio -->
+        <div class="card p-5 text-center d-none" id="emptyState">
+            <div class="d-flex align-items-center justify-content-center rounded-circle bg-success mx-auto mb-4" style="width: 80px; height: 80px; opacity: 0.1;">
+                <i class="fas fa-check-circle fa-2x text-success"></i>
+            </div>
+            <h2 class="mb-2">Nenhum alerta</h2>
+            <p class="text-muted mb-0">Seu sistema está funcionando normalmente</p>
+        </div>
+
+        <!-- Paginação -->
+        <div class="d-flex align-items-center justify-content-between border rounded p-3 mt-4 bg-card" aria-label="Paginação de alertas">
+            <button class="btn btn-outline" disabled aria-label="Página anterior">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="text-muted">
+                Página <span id="currentPage" class="fw-semibold">1</span> de <span id="totalPages" class="fw-semibold">1</span>
+            </div>
+            <button class="btn btn-outline" disabled aria-label="Próxima página">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </main>
+
+    <!-- Modal de configurações -->
+    <div class="modal" id="settingsModal" aria-labelledby="modalTitle" aria-modal="true" hidden>
+        <div class="card" style="width: 100%; max-width: 500px; margin: 32px auto;">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h2 id="modalTitle" class="card-title">Configurações de Notificação</h2>
+                <button class="btn btn-outline" aria-label="Fechar">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="card-body">
+                <form id="notificationForm">
+                    <div class="mb-4">
+                        <h3 class="fs-lg fw-semibold mb-3">Tipos de Alerta</h3>
+                        <div class="d-flex flex-column gap-3">
+                            <label class="d-flex align-items-center gap-3">
+                                <input type="checkbox" name="criticalAlerts" checked>
+                                <div>
+                                    <div class="fw-medium">Alertas Críticos</div>
+                                    <div class="text-muted fs-sm">Notificações de alta prioridade</div>
+                                </div>
+                            </label>
+                            <label class="d-flex align-items-center gap-3">
+                                <input type="checkbox" name="warningAlerts" checked>
+                                <div>
+                                    <div class="fw-medium">Avisos</div>
+                                    <div class="text-muted fs-sm">Notificações de média prioridade</div>
+                                </div>
+                            </label>
+                            <label class="d-flex align-items-center gap-3">
+                                <input type="checkbox" name="infoAlerts" checked>
+                                <div>
+                                    <div class="fw-medium">Informações</div>
+                                    <div class="text-muted fs-sm">Notificações de baixa prioridade</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h3 class="fs-lg fw-semibold mb-3">Método de Notificação</h3>
+                        <div class="d-flex flex-column gap-3">
+                            <label class="d-flex align-items-center gap-3">
+                                <input type="checkbox" name="pushNotifications">
+                                <div>
+                                    <div class="fw-medium">Notificações Push</div>
+                                    <div class="text-muted fs-sm">Alertas direto no navegador</div>
+                                </div>
+                            </label>
+                            <label class="d-flex align-items-center gap-3">
+                                <input type="checkbox" name="emailNotifications">
+                                <div>
+                                    <div class="fw-medium">E-mail</div>
+                                    <div class="text-muted fs-sm">Receber alertas por e-mail</div>
+                                </div>
+                            </label>
+                            <label class="d-flex align-items-center gap-3">
+                                <input type="checkbox" name="smsNotifications">
+                                <div>
+                                    <div class="fw-medium">SMS</div>
+                                    <div class="text-muted fs-sm">Receber alertas por mensagem de texto</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h3 class="fs-lg fw-semibold mb-3">Horários</h3>
+                        <div class="card p-3">
+                            <div class="fw-medium mb-2">Não perturbe</div>
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="form-group mb-0">
+                                    <label class="form-label">Início</label>
+                                    <input type="time" name="quietStart" value="22:00" class="form-control">
+                                </div>
+                                <div class="form-group mb-0">
+                                    <label class="form-label">Fim</label>
+                                    <input type="time" name="quietEnd" value="07:00" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="card-footer d-flex justify-content-end gap-2">
+                <button class="btn btn-outline" data-action="cancel">Cancelar</button>
+                <button class="btn btn-primary" data-action="save">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="paginas/privacidade.html">Política de Privacidade</a>
+                <a href="paginas/termos.html">Termos de Uso</a>
+                <a href="paginas/suporte.html">Suporte</a>
+            </div>
+            <p class="footer-copyright">© 2025 SecuHouse. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Toast de notificação -->
+    <div class="alert alert-success" id="notificationToast" role="alert" style="display: none; position: fixed; bottom: 24px; right: 24px; z-index: 1050;"></div>
+
+    <!-- Scripts -->
+    <script src="scripts/main.js" defer></script>
+    <script src="scripts/alerts.js" defer></script>
+    <script src="scripts/system.js" defer></script>
 </body>
 </html>
