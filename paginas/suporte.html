@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Suporte - SecuHouse</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="../estilos/main.css">
+    <link rel="stylesheet" type="text/css" href="../estilos/components.css">
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
+    
+    <header>
+        <div class="logo-container">
+            <img src="../imagens/logo.png" alt="Logo SecuHouse" class="logo">
+            <h1 id="tituloHeader">SecuHouse</h1>
+        </div>
+        
+        <div class="d-flex align-items-center gap-3">
+            <button class="theme-toggle" aria-label="Alternar tema claro/escuro">
+                <i class="fas fa-sun"></i>
+                <i class="fas fa-moon"></i>
+            </button>
+            
+            <button class="menu-toggle d-md-none" aria-label="Menu" aria-expanded="false">
+                <span class="hamburger"></span>
+            </button>
+        </div>
+    </header>
+
+    <nav aria-label="Menu principal">
+        <div class="nav-group">
+            <a href="../index.html">
+                <i class="fas fa-home"></i>
+                <span>Início</span>
+            </a>
+            <a href="../dispositivos.html">
+                <i class="fas fa-video"></i>
+                <span>Dispositivos</span>
+            </a>
+            <a href="../alertas.html">
+                <i class="fas fa-bell"></i>
+                <span>Alertas</span>
+            </a>
+            <a href="../contato.html">
+                <i class="fas fa-envelope"></i>
+                <span>Contato</span>
+            </a>
+        </div>
+    </nav>
+
+    <main id="main-content" class="container" tabindex="-1">
+        <div class="content-wrapper">
+            <h1>Central de Suporte</h1>
+            
+            <section class="card mb-4">
+                <div class="card-body">
+                    <h2>Precisa de ajuda?</h2>
+                    <p>Nossa equipe está disponível 24/7 para ajudar você com qualquer problema.</p>
+                    
+                    <div class="d-flex gap-3 flex-wrap">
+                        <a href="tel:0800123456" class="btn btn-primary">
+                            <i class="fas fa-phone-alt"></i>
+                            Ligar para Suporte
+                        </a>
+                        <a href="mailto:suporte@secuhouse.com" class="btn btn-outline">
+                            <i class="fas fa-envelope"></i>
+                            Enviar E-mail
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-5">
+                <h2>Perguntas Frequentes</h2>
+                
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <h3>
+                            <button class="accordion-button">
+                                Como configurar um novo dispositivo?
+                            </button>
+                        </h3>
+                        <div class="accordion-content">
+                            <p>Para configurar um novo dispositivo, siga estes passos:</p>
+                            <ol>
+                                <li>Conecte o dispositivo à energia</li>
+                                <li>Pressione o botão de pareamento</li>
+                                <li>Abra o app SecuHouse</li>
+                                <li>Vá em "Adicionar Dispositivo"</li>
+                                <li>Siga as instruções na tela</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h3>
+                            <button class="accordion-button">
+                                Como recuperar minha senha?
+                            </button>
+                        </h3>
+                        <div class="accordion-content">
+                            <p>Clique em "Esqueci minha senha" na tela de login e siga as instruções enviadas ao seu e-mail.</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h3>
+                            <button class="accordion-button">
+                                O que fazer em caso de falso alarme?
+                            </button>
+                        </h3>
+                        <div class="accordion-content">
+                            <p>Em caso de falso alarme:</p>
+                            <ol>
+                                <li>Acesse o painel de controle</li>
+                                <li>Clique em "Desativar Alarme"</li>
+                                <li>Insira seu código de segurança</li>
+                                <li>Confirme o cancelamento</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="privacidade.html">Política de Privacidade</a>
+                <a href="termos.html">Termos de Uso</a>
+                <a href="suporte.html" aria-current="page">Suporte</a>
+            </div>
+            <p class="footer-copyright">© 2025 SecuHouse. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="scripts/main.js" defer></script>
+</body>
+</html>
